@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프롬프트 분석 대시보드</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="./assets/images/command.svg" alt="CLiCK 로고" class="brand__logo" width="32" height="32">
+      <span class="brand__name">CLiCK</span>
+    </div>
+    <nav class="sidebar__nav">
+      <a href="#personal-usage">개인 사용량</a>
+      <a href="#before-after">개선 전/후 비교</a>
+      <a href="#user-behavior">사용자 행동 분석</a>
+      <a href="#topic-insights">주제별 인사이트</a>
+      <a href="#prompt-report">프롬프트 리포트</a>
+      <a href="#leaderboard">리더보드</a>
+      <a href="#community-trends">타인 정보 & 트렌드</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="hero">
+      <div>
+        <h1>프롬프트 분석 대시보드</h1>
+        <p>개인 성과부터 커뮤니티 트렌드까지 한눈에 확인하고, 더 나은 프롬프트 전략을 설계하세요.</p>
+        <div id="user-status" class="user-status" style="display:none;"></div>
+      </div>
+      <div class="hero__actions">
+        <button id="login-button" class="btn btn--primary">로그인</button>
+        <button id="refresh-data" class="btn btn--ghost">데이터 새로고침</button>
+        <div class="export-group">
+          <button id="export-json" class="btn btn--primary">JSON 내보내기</button>
+          <button id="export-csv" class="btn btn--secondary">CSV 내보내기</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="personal-usage" class="card">
+      <header class="card__header">
+        <h2>개인 사용량 & 개선 효과</h2>
+        <p>지난 30일 동안의 사용 내역과 개선 성과입니다.</p>
+      </header>
+      <div class="grid grid--3" id="personal-stats"></div>
+      <div class="card__body">
+        <div class="section-split">
+          <article class="subcard">
+            <h3>카테고리별 사용 비율</h3>
+            <div class="chart-container chart-container--md">
+              <canvas id="category-ratio-chart"></canvas>
+            </div>
+          </article>
+          <article class="subcard">
+            <h3>개선 지표 비교</h3>
+            <div class="chart-container chart-container--md">
+              <canvas id="improvement-trend-chart"></canvas>
+            </div>
+            <ul id="improvement-trend-hints" class="hint-list"></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="before-after" class="card">
+      <header class="card__header">
+        <h2>개선 전/후 비교 통계</h2>
+        <p>최적화된 프롬프트가 어떤 영향을 주었는지 비교합니다.</p>
+      </header>
+      <div class="comparison-table" id="before-after-table"></div>
+    </section>
+
+    <section id="user-behavior" class="card">
+      <header class="card__header">
+        <h2>사용자 행동 분석</h2>
+        <p>사용 패턴과 자주 묻는 주제, 활발한 시간대를 살펴봅니다.</p>
+      </header>
+      <div class="section-split">
+        <article class="subcard">
+          <h3>사용자별 패턴</h3>
+          <div id="user-patterns" class="list-block"></div>
+        </article>
+        <article class="subcard">
+          <h3>자주 묻는 주제</h3>
+          <ul id="faq-topics" class="tag-list"></ul>
+        </article>
+        <article class="subcard">
+          <h3>활발한 시간대</h3>
+          <div class="chart-container chart-container--md">
+            <canvas id="active-hours-chart"></canvas>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="topic-insights" class="card">
+      <header class="card__header">
+        <h2>주제별 인사이트</h2>
+        <p>카테고리 별 성과와 인사이트를 정리했습니다.</p>
+      </header>
+      <div id="topic-cards" class="grid grid--4"></div>
+    </section>
+
+    <section id="prompt-report" class="card">
+      <header class="card__header">
+        <h2>프롬프트 리포트</h2>
+        <p>원본과 개선된 프롬프트를 비교하고 성과를 확인하세요.</p>
+      </header>
+      <div id="prompt-report-table" class="prompt-table"></div>
+    </section>
+
+    <section id="leaderboard" class="card">
+      <header class="card__header">
+        <h2>리더보드</h2>
+        <p>가장 많이 개선된 프롬프트 유형과 상위 키워드를 소개합니다.</p>
+      </header>
+      <div class="section-split">
+        <article class="subcard">
+          <h3>상위 프롬프트 유형</h3>
+          <ol id="top-prompt-types" class="rank-list"></ol>
+        </article>
+        <article class="subcard">
+          <h3>상위 키워드</h3>
+          <ol id="top-keywords" class="rank-list"></ol>
+        </article>
+      </div>
+    </section>
+
+    <section id="community-trends" class="card">
+      <header class="card__header">
+        <h2>타인 정보 & 커뮤니티 트렌드</h2>
+        <p>다른 사용자의 인기 주제와 인구통계별 질의 키워드를 확인합니다.</p>
+      </header>
+      <div class="section-split">
+        <article class="subcard">
+          <h3>커뮤니티 인기 주제</h3>
+          <div class="chart-container chart-container--sm">
+            <canvas id="community-topics-chart"></canvas>
+          </div>
+        </article>
+        <article class="subcard">
+          <h3>인구통계별 상위 키워드</h3>
+          <div id="demographic-keywords" class="demographic-grid"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <script type="module" src="../src/app.js"></script>
+</body>
+</html>
