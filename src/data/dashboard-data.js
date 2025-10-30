@@ -25,6 +25,11 @@ export const dashboardData = {
     { metric: "재질문 비율", before: 24, after: 11, unit: "%" },
   ],
   userBehavior: {
+    patterns: [
+      { user: "de***", pattern: "야간(22~01시) 집중 사용", focus: "코딩 디버깅" },
+      { user: "te***", pattern: "낮(09~12시) 집중 사용", focus: "요약 및 회의 준비" },
+      { user: "ad***", pattern: "주말 집중 세션", focus: "번역 & 리라이팅" },
+    ],
     faqTopics: [
       { topic: "React 상태 관리", count: 42 },
       { topic: "데이터 시각화", count: 35 },
@@ -75,6 +80,7 @@ export const dashboardData = {
       original: "이 에러 로그 좀 이해해줘.",
       improved:
         "아래 Node.js 서버 에러 로그를 재구성해서 원인 후보 3가지를 요약하고, 각 항목에 대응 전략을 제시해줘.\n```\n[log snippet]\n```",
+      notes: ["응답 길이 30% 감소", "해결 소요 시간 5분 → 2분"],
     },
     {
       title: "해외 고객 지원 메일",
@@ -82,6 +88,7 @@ export const dashboardData = {
       original: "고객에게 사과 메일 작성해줘.",
       improved:
         "다음 고객 상황을 참고해 사과+보상 메일을 작성해줘. 브랜드 톤은 '전문적이고 진정성 있는' 느낌으로.\n- 문제: 배송 지연 4일\n- 고객 타입: VIP\n- 보상: 추가 포인트 5,000점",
+      notes: ["NPS 3.1 → 4.6", "회신 시간 2배 단축"],
     },
     {
       title: "IR 피치 자료",
@@ -89,6 +96,7 @@ export const dashboardData = {
       original: "우리 회사 소개 자료 만들어줘.",
       improved:
         "아래 항목을 중심으로 6장 슬라이드 구조를 제안하고 각 슬라이드에 들어갈 핵심 카피를 작성해줘.\n- 시장 문제: …\n- 해결 방법: …\n- 경쟁 우위: …",
+      notes: ["발표 준비 시간 30% 절약", "투자자 질의 응답 대비 ↑"],
     },
   ],
   leaderboard: {
